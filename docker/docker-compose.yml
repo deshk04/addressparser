@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  addr_database:
+    image: "postgres:13"
+    container_name: addr_postgres
+    environment:
+      - TZ=Australia/Melbourne
+    env_file: ./.env
+    volumes:
+      # - ${REPO_PATH}/storage/pgdata:/var/lib/postgresql/data/
+      # - ./postgres/addr_init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    restart: on-failure:5
+
+
+  web:
+    image: django
+    build:
+      context: .
+      dockerfile: ./django/Dockerfile
+    container_name: addr_web_container
+    environment:
+      - TZ=Australia/Melbourne
+      - PG_HOST=${POSTGRES_HOST}
+      - PG_DATABASE=${POSTGRES_DATABASE}
+      - PG_USER=${POSTGRES_USER}
+      - PG_PASSWORD=${POSTGRES_PASSWORD}
+    env_file: ./.env
+    volumes:
+      - ${REPO_PATH}:/addr/
+    ports:
+      - "8080:8080"
+    links:
+      - addr_database
+    depends_on:
+      - addr_database
+    restart: always
+
