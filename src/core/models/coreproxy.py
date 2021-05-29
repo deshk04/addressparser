@@ -8,7 +8,7 @@ from adr.models import AddressDetails, GooglePlaces
 from adr.models import DimAddrAbbrWords, DimAddrCommonwords, DimAddrPatch
 from adr.models import DimAddrPobox, DimAddressType, DimCommonWords
 from adr.models import DimGnafPostcode, DimGnafStreets, DimNameAbbr
-from adr.models import DimPobox, DimWordDictionary
+from adr.models import DimPobox, DimWordDictionary, DimGnafAddressDetails
 from adr.models import StagingInputData, StagingProcessedAddress
 
 from core.models.modelmanager import ModelManager
@@ -146,6 +146,18 @@ class DimWordDictionaryProxy(DimWordDictionary):
     class Meta:
         proxy = True
         app_label = 'adr'
+
+
+class DimGnafAddressDetailsProxy(DimGnafAddressDetails):
+    objects = ModelManager()
+
+    def __init__(self, *args, **kwargs):
+        super(DimGnafAddressDetails, self).__init__(*args, **kwargs)
+
+    class Meta:
+        proxy = True
+        app_label = 'adr'
+
 
 
 class StagingInputDataProxy(StagingInputData):

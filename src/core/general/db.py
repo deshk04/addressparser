@@ -17,9 +17,9 @@ import logging
 from psycopg2.extras import NamedTupleConnection, RealDictCursor
 # from django.core.serializers.json import DjangoJSONEncoder
 
-from hub.general import settings
-from hub.general import exceptions
-from hub.pattern import Singleton
+from core.general import settings
+from core.general import exceptions
+from core.pattern import Singleton
 import pdb
 
 class Database(metaclass=Singleton):
@@ -28,11 +28,11 @@ class Database(metaclass=Singleton):
     """
 
     def __init__(self, database=settings.CURRENT_DB):
-        self.host = os.getenv("PGHOST", settings.DB_HOST)
-        self.port = os.getenv("PGPORT", settings.DB_PORT)
+        self.host = os.getenv("PG_HOST", settings.DB_HOST)
+        self.port = os.getenv("PG_PORT", settings.DB_PORT)
         self.db = database
-        self.user = os.getenv("PGUSER", settings.DB_USER)
-        self.password = os.getenv("PGPASSWORD", "password")
+        self.user = os.getenv("PG_USER", settings.DB_USER)
+        self.password = os.getenv("PG_PASSWORD", "password")
         self.pgconnectstring = "dbname='{0}' host='{1}' port='{2}' \
                                 user='{3}' password='{4}'".format(
             self.db, self.host, self.port,
@@ -41,7 +41,7 @@ class Database(metaclass=Singleton):
             self.connstring = psycopg2.connect(self.pgconnectstring)
         except psycopg2.Error as err:
             logging.debug(err.diag.message_primary)
-            raise exceptions.PDMDBConnError(err.diag.message_primary)
+            raise exceptions.DBConnError(err.diag.message_primary)
         self.connstring.autocommit = True
 
         self.cursor = self.connstring.cursor(

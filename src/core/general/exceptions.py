@@ -1,7 +1,7 @@
 """
-  Author:         
-  Create date:    
-  Description:    PDM custom exception
+  Author:
+  Create date:
+  Description:    ADDR custom exception
 
 
   Date                Description(of Changes)
@@ -10,75 +10,75 @@
 import logging
 
 """
-Global PDMas exception and warning classes.
+Global ADDRas exception and warning classes.
 """
 
-class PDMMandatoryFieldMissing(Exception):
+class ADDRMandatoryFieldMissing(Exception):
     """Mandatory field does not exist"""
     logging.debug("some required fields are missing")
 
 
-class PDMUnknownError(Exception):
+class ADDRUnknownError(Exception):
     """Api (e.g. google) Unknown Error"""
     logging.debug("Unknown Error")
 
 
-class PDMZeroResults(Exception):
+class ADDRZeroResults(Exception):
     """Api resulted in no output"""
     logging.debug("Zero Result returned")
 
 
-class PDMOverQueryLimit(Exception):
+class ADDROverQueryLimit(Exception):
     """Google Api Query Limit"""
     logging.debug("Api Query Limit Reached")
 
 
-class PDMRequestDenied(Exception):
+class ADDRRequestDenied(Exception):
     """Google Api Request Denied"""
     logging.debug("Api Request Denied")
 
 
-class PDMInvalidRequest(Exception):
+class ADDRInvalidRequest(Exception):
     """Google Api Invalid Request"""
     logging.debug("Api Invalid Request")
 
 
-class PDMNotFound(Exception):
+class ADDRNotFound(Exception):
     """Request return not found"""
     logging.debug("Api Request Not found")
 
 
-class PDMDBQueryError(Exception):
+class ADDRDBQueryError(Exception):
     """Database query had issue"""
     logging.debug("Database query problem")
 
 
-class PDMDBConnError(Exception):
+class ADDRDBConnError(Exception):
     """Database query had issue"""
     logging.debug("Database connection problem")
 
 
-class PDMMultipleObjectsReturned(Exception):
+class ADDRMultipleObjectsReturned(Exception):
     """Database query had issue"""
     logging.debug("Multiple Objects Returned")
 
-class PDMSOAPConnectionError(Exception):
+class ADDRSOAPConnectionError(Exception):
     """SOAP Connection had issue"""
     logging.debug("SOAP connection Error")
 
-class PDMSOAPException(Exception):
+class ADDRSOAPException(Exception):
     """SOAP Connection had issue"""
     logging.debug("SOAP Exception")
 
-class PDMSOAPInvalidConnection(Exception):
+class ADDRSOAPInvalidConnection(Exception):
     """SOAP Connection had issue"""
     logging.debug("SOAP Invalid Connection")
 
-class PDMSOAPServiceError(Exception):
+class ADDRSOAPServiceError(Exception):
     """SOAP Service had issue"""
     logging.debug("SOAP Service Error")
 
 
-class PDMSOAPServiceDataError(Exception):
+class ADDRSOAPServiceDataError(Exception):
     """SOAP Service had issue"""
     logging.debug("SOAP Service Data Error")

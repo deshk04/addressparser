@@ -1,6 +1,6 @@
 """
-  Author:         
-  Create date:    
+  Author:
+  Create date:
   Description:    Provide encryption and decryption function for sensitive data
 
 
@@ -12,10 +12,10 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
 from Crypto import Random
-from hub.general import settings
+from core.general import settings
 
 
-class PDMEncryption():
+class Encryption():
     """
         Class to encrypt and decrypt a string
     """
