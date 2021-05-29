@@ -131,6 +131,58 @@ class DimCommonWords(models.Model):
         db_table = 'dim_common_words'
 
 
+class DimGnafAddressDetails(models.Model):
+    address_detail_pid = models.CharField(max_length=15, blank=True, null=True)
+    street_locality_pid = models.CharField(max_length=15, blank=True, null=True)
+    locality_pid = models.CharField(max_length=15, blank=True, null=True)
+    building_name = models.TextField(blank=True, null=True)
+    lot_number_prefix = models.TextField(blank=True, null=True)
+    lot_number = models.CharField(max_length=5, blank=True, null=True)
+    lot_number_suffix = models.TextField(blank=True, null=True)
+    flat_type = models.TextField(blank=True, null=True)
+    flat_number_prefix = models.TextField(blank=True, null=True)
+    flat_number = models.DecimalField(max_digits=5, decimal_places=0, blank=True, null=True)
+    flat_number_suffix = models.TextField(blank=True, null=True)
+    level_type = models.TextField(blank=True, null=True)
+    level_number_prefix = models.TextField(blank=True, null=True)
+    level_number = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
+    level_number_suffix = models.TextField(blank=True, null=True)
+    number_first_prefix = models.TextField(blank=True, null=True)
+    number_first = models.DecimalField(max_digits=6, decimal_places=0, blank=True, null=True)
+    number_first_suffix = models.TextField(blank=True, null=True)
+    number_last_prefix = models.TextField(blank=True, null=True)
+    number_last = models.DecimalField(max_digits=6, decimal_places=0, blank=True, null=True)
+    number_last_suffix = models.TextField(blank=True, null=True)
+    street_name = models.TextField(blank=True, null=True)
+    street_class_code = models.TextField(blank=True, null=True)
+    street_class_type = models.TextField(blank=True, null=True)
+    street_type_code = models.TextField(blank=True, null=True)
+    street_suffix_code = models.TextField(blank=True, null=True)
+    street_suffix_type = models.TextField(blank=True, null=True)
+    locality_name = models.TextField(blank=True, null=True)
+    state_abbreviation = models.TextField(blank=True, null=True)
+    postcode = models.CharField(max_length=4, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
+    geocode_type = models.TextField(blank=True, null=True)
+    confidence = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
+    alias_principal = models.CharField(max_length=1, blank=True, null=True)
+    primary_secondary = models.CharField(max_length=1, blank=True, null=True)
+    legal_parcel_id = models.CharField(max_length=20, blank=True, null=True)
+    date_created = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        """
+            print all the variables
+        """
+        return str(self.__class__) + ": " + str(self.__dict__)
+
+    class Meta:
+        managed = False
+        db_table = 'dim_gnaf_address_details'
+        unique_together = (('address_detail_pid', 'street_name', 'locality_name', 'state_abbreviation', 'postcode', 'latitude', 'longitude'),)
+
+
 class DimGnafPostcode(models.Model):
     postcode = models.CharField(max_length=4, blank=True, null=True)
     state = models.CharField(max_length=3, blank=True, null=True)

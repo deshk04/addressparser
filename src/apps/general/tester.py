@@ -12,9 +12,6 @@ from core.general import start
 from core.general import Database
 
 
-
-
-
 def main():
     """
         Main script which handles the request for abn
@@ -52,18 +49,33 @@ def main():
 # org: melbourne heart care -37.9384362 145.2114277
 
     from core.parser.addressparser import AddressParser
+    from core.parser.gnafhandler import GnafHandler
 
     addparser = AddressParser(
-        address_line1='l 2 haematology & oncology',
-        address_line2='183 wattletree rd',
-        suburb='malvern',
-        postcode='3144',
+        address_line1='l 2, 55 flemington rd',
+        address_line2='',
+        suburb='hotham hill',
+        postcode='3051',
         state='vic'
     )
     addparser.parse()
 
+    if addparser.addressdetails:
+        print('Searching for gnaf...')
+        gnafHandler = GnafHandler()
+        gnafHandler.dbObj = db_obj
+        gnafHandler.addressdetails = addparser.addressdetails
+        record = gnafHandler.execute()
+        if record:
+            addparser.addressdetails.premises_type = record.geocode_type
+            addparser.addressdetails.latitude = record.latitude
+            addparser.addressdetails.longitude = record.longitude
+            addparser.addressdetails.parcel_id = record.legal_parcel_id
+            print(str(addparser.addressdetails))
+    else:
+        print('Not found')
+
     pdb.set_trace()
-    print('address')
 
 
 
