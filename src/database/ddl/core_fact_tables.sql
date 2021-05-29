@@ -128,7 +128,8 @@ CREATE TABLE staging_processed_address
 	parcel_id    text,
 	premises_type text,
 	postal_id text,
-    rank integer
+    rank integer,
+    exception_flag char(1)
  )
 WITH (
     OIDS = FALSE

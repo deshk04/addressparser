@@ -13,7 +13,7 @@ CURRENT_DB = os.getenv('PGDATABASE', 'addrmain')
 # logging level
 LOGGING_LEVEL = 10
 LOGGING_SCREEN = True
-LOG_PATH = PROJECT_ROOT_PATH + '/ops/logs/modules/'
+LOG_PATH = PROJECT_ROOT_PATH + '/ops/logs/apps/'
 
 # System related settings
 ENVIRONMENT = 'dev'

@@ -1,6 +1,6 @@
 """
-#  Author:         
-#  Create date:    
+#  Author:
+#  Create date:
 #  Description:    Address Mapper
 #
 #
@@ -12,8 +12,8 @@ from datetime import datetime
 from django.utils.timezone import get_current_timezone
 import logging
 
-from hub.general import *
-from hub.general import settings
+from core.general import *
+from core.general import settings
 
 from django.db.models import Q
 from django.db import connection, transaction
@@ -39,7 +39,7 @@ class AddressMapper():
         """
             let's map the output
         """
-        from hub.models.coreproxy import AddressDetailsProxy
+        from core.models.coreproxy import AddressDetailsProxy
 
         if not self.staging_address:
             self.seterror('Mandatory fields missing')
@@ -98,7 +98,7 @@ class AddressMapper():
             result = cursor.fetchone()
             address_id = result[0]
 
-            address_details = AddressDetailsProxy(  
+            address_details = AddressDetailsProxy(
                 address_id=address_id,
                 record_creation_date=datetime.now(tz=get_current_timezone()),
                 record_user=self.user_id,
@@ -140,4 +140,3 @@ class AddressMapper():
         self.status = 1
         self.errorMessage = message
         logging.error(message)
-        

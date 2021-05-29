@@ -21,6 +21,9 @@ import pdb
 
 
 class AddressReference(metaclass=Singleton):
+    """
+        reference data for address module
+    """
 
     def __init__(self):
         self.suffixwords = defaultdict(list)
@@ -155,14 +158,6 @@ class AddressReference(metaclass=Singleton):
             patchdf['type'] != 'S', ['sourcestring', 'destinationstring']]
         del patchdf
 
-        """
-           let's fetch the google medical types list
-        """
-        query = """select type, medflag from dim_google_types """
-        cursor = self.dbobj.query(query)
-        records = cursor.fetchall()
-        for record in records:
-            self.googletypes[record.medflag].append(record.type)
 
         """
            let's fetch postcode which fells under 2 states
@@ -180,14 +175,6 @@ class AddressReference(metaclass=Singleton):
         for row in rows:
             self.gnafpostcodes[row.postcode].append(row.state)
 
-        """
-         let's fetch the list of exclude words for google
-        """
-        query = """select word from dim_google_exclude """
-        cursor = self.dbobj.query(query)
-        records = cursor.fetchall()
-        for record in records:
-            self.excludewords.append(record.word)
 
         """
           for names we pick up short names
@@ -260,36 +247,3 @@ class AddressReference(metaclass=Singleton):
 
         return None
 
-    def valid_googletype(self, gTypes):
-        if not gTypes:
-            False
-
-        for val in gTypes:
-            if val in self.googletypes['I']:
-                return False
-
-        for val in gTypes:
-            if val in self.googletypes['M']:
-                return True
-
-        return True
-
-    def valid_googletypeMed(self, gTypes):
-        if not gTypes:
-            False
-
-        for val in gTypes:
-            if val in self.googletypes['M']:
-                return True
-
-        return False
-
-    def valid_googletypeGen(self, gTypes):
-        if not gTypes:
-            False
-
-        for val in gTypes:
-            if val in self.googletypes['G']:
-                return True
-
-        return False

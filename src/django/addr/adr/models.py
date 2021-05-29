@@ -5,7 +5,7 @@ class AddressDetails(models.Model):
     system_creation_date = models.DateTimeField(blank=True, null=True)
     system_update_date = models.DateTimeField(blank=True, null=True)
     user_id = models.TextField(blank=True, null=True)
-    address_id = models.BigAutoField(unique=True)
+    address_id = models.BigIntegerField(unique=True)
     pobox_type = models.TextField(blank=True, null=True)
     pobox_number = models.TextField(blank=True, null=True)
     building_name = models.TextField(blank=True, null=True)
@@ -313,6 +313,7 @@ class StagingProcessedAddress(models.Model):
     premises_type = models.TextField(blank=True, null=True)
     postal_id = models.TextField(blank=True, null=True)
     rank = models.IntegerField(blank=True, null=True)
+    exception_flag = models.CharField(max_length=1, blank=True, null=True)
 
     def __str__(self):
         """
