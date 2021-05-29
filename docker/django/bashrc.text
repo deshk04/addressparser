@@ -1,10 +1,8 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-alias dng='docker exec -it addr_ng_container bash'
 alias dweb='docker exec -it addr_web_container bash'
 alias reload='touch /addr/ops/workspace/reload.addr.txt'
 alias app='cd /addr/src/apps'
-alias web='cd /addr/src/django/web'
-alias ang='cd /addr/src/angular/ng-addr/src/'
+alias web='cd /addr/src/django/addr'
 alias cdapp='function _app(){ cd "/addr/src/apps/$1";};_app'
 export PYTHONPATH='/addr/src'
 alias lr='ls -ltr'
