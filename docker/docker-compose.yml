@@ -2,20 +2,23 @@ version: '3.7'
 
 services:
   addr_database:
-    image: "postgres:13"
+    # image: "postgres:13"
+    image: "kartoza/postgis:13.0"
+    shm_size: 1g
     container_name: addr_postgres
     environment:
       - TZ=Australia/Melbourne
     env_file: ./.env
     volumes:
       # - ${REPO_PATH}/storage/pgdata:/var/lib/postgresql/data/
-      # - ./postgres/addr_init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres/initdb.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${REPO_PATH}:/addr/
     ports:
       - "5432:5432"
     restart: on-failure:5
 
 
-  web:
+  addr_web:
     image: django
     build:
       context: .
