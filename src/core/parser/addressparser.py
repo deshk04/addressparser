@@ -129,6 +129,7 @@ class AddressParser():
             """
                 lets do fuzzy matching check
             """
+
             fuzzy_search = True
             tempaddrfinder.find_street(fuzzy_search)
             if tempaddrfinder.components.get(

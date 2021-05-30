@@ -75,7 +75,7 @@ def search_word(i_word, i_string, i_startpos=0):
     return outputDict
 
 
-def search_word_fuzzy(word, string, startpos=0):
+def search_word_fuzzy(i_word, i_string, startpos=0):
     """
         word: is the word to be searched
         string: string to perform the operation on
@@ -85,14 +85,14 @@ def search_word_fuzzy(word, string, startpos=0):
     resultdict = {}
     idx = 0
 
-    if len(word) < 3:
+    if len(i_word) < 3:
         return resultdict
     """
         first we check if a simple singular vs plural match
         works for e.g. match hill with hills
     """
-    for word in string.split():
-        if word + 's' == word:
+    for word in i_string.split():
+        if word + 's' == i_word:
             """
                 to handle cases like
                 word: hill
@@ -101,7 +101,7 @@ def search_word_fuzzy(word, string, startpos=0):
             posEnd = newstartpos + len(word) + 1
             resultdict[idx] = [newstartpos, posEnd]
             idx += 1
-        elif word == word + 's':
+        elif word == i_word + 's':
             posEnd = newstartpos + len(word) + 1
             resultdict[idx] = [newstartpos, posEnd]
             idx += 1
@@ -112,13 +112,13 @@ def search_word_fuzzy(word, string, startpos=0):
     """
     idx = 0
     newstartpos = startpos
-    if not resultdict and len(word) > 4:
-        for word in string.split():
-            if len(word) > 4 and word[:2] == word[:2]:
-                if (jf.metaphone(word) == jf.metaphone(word) and
-                    jf.levenshtein_distance(word, word) < 3) or \
-                   (jf.match_rating_comparison(word, word) and
-                        jf.levenshtein_distance(word, word) < 2):
+    if not resultdict and len(i_word) > 4:
+        for word in i_string.split():
+            if len(word) > 4 and word[:2] == i_word[:2]:
+                if (jf.metaphone(word) == jf.metaphone(i_word) and
+                    jf.levenshtein_distance(word, i_word) < 3) or \
+                   (jf.match_rating_comparison(word, i_word) and
+                        jf.levenshtein_distance(word, i_word) < 2):
                     posEnd = newstartpos + len(word) + 1
                     resultdict[idx] = [newstartpos, posEnd]
                     idx += 1
@@ -138,10 +138,9 @@ def clean_string(string):
     unCharSet = {'\\': ' ', "'": '', '(': ' ', ')': ' ',
                  '.': ' ', ',': ' ', '&': ' and ',
                  ';': '', ')': '', '(': '', '}': '',
-                 '{': '', ']': '', '[': '', '/': '',
+                 '{': '', ']': '', '[': '', '/': ' ',
                  '\\': '', '>': '', '<': '', '=': '',
-                 '|': '', '%': '', '\'': '', '*': '',
-                 'undefined': ''}
+                 '|': '', '%': '', '\'': '', '*': ''}
 
     if string is None:
         return None
