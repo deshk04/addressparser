@@ -26,6 +26,7 @@ class AddressFinder():
         self.allowed_fields = set(['address_line', 'suburb',
                                    'postcode', 'state'])
         self.components = {}
+        self.streetPos = {}
         for field in self.allowed_fields:
             """
                 check to be added to make sure mandatory fields are populated
@@ -50,6 +51,7 @@ class AddressFinder():
             self.street_type = streetdata.street_type
 
             self.street_confidence = 0
+            self.streetPos = {}
 
             """
                 if the street name is common word
@@ -161,7 +163,7 @@ class AddressFinder():
                 if self.street_confidence >= 3:
                     break
 
-            if fuzzy_search == 0:
+            if not fuzzy_search:
                 """
                     we need street number and street type
                     else ignore the self.street_confidence

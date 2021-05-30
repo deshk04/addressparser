@@ -52,11 +52,11 @@ def main():
     from core.parser.gnafhandler import GnafHandler
 
     addparser = AddressParser(
-        address_line1='l 2, 55 flemington rd',
-        address_line2='',
-        suburb='hotham hill',
-        postcode='3051',
-        state='vic'
+        address_line1='12/1-5 IVY ST',
+        address_line2='WOLLSTONECRAFT',
+        suburb='WOLLSTONECRAFT',
+        postcode='2065',
+        state='nsw'
     )
     addparser.parse()
 
